@@ -1,0 +1,92 @@
+{
+	"surveys":
+	{
+	  "surveyList": [
+		{
+		  "userId": 1,
+		  "userEmail": "test-user@test.com",
+		  "marketUnit": "Test Market Unit",
+		  "project": "TestProject",
+		  "surveyId": 1,
+		  "surveyTitle": "Accenture Innovation Quotient Survey",
+		  "version": 1,
+		  "status": "COMPLETED",
+		  "score": "37.0/100.0",
+		  "rating": "3.33/9.0",
+		  "level": "INTERMEDIATE",
+		  "submittedOn": "2021-04-21T18:30:00.000+00:00"
+		},
+		{
+		  "userId": 1,
+		  "userEmail": "test-user@test.com",
+		  "marketUnit": "Test Market Unit",
+		  "project": "TestProject",
+		  "surveyId": 1,
+		  "surveyTitle": "Accenture Innovation Quotient Survey",
+		  "version": 1,
+		  "status": "IN PROGRESS",
+		  "score": "37.0/100.0",
+		  "rating": "3.33/9.0",
+		  "level": null,
+		  "submittedOn": "2021-04-21T18:30:00.000+00:00"
+		},
+		{
+		  "userId": 2,
+		  "userEmail": "test-user@test.com",
+		  "marketUnit": "Test Market Unit",
+		  "project": "TestProject",
+		  "surveyId": 1,
+		  "surveyTitle": "Accenture Innovation Quotient Survey",
+		  "version": 1,
+		  "status": "COMPLETED",
+		  "score": "37.0/100.0",
+		  "rating": "3.33/9.0",
+		  "level": "LEADER",
+		  "submittedOn": "2021-04-21T18:30:00.000+00:00"
+        },
+        {
+            "userId": 1,
+            "userEmail": "test-user@test.com",
+            "marketUnit": "Test Market Unit",
+		    "project": "TestProject",
+            "surveyId": 1,
+            "surveyTitle": "Accenture Innovation Quotient Survey",
+            "version": 1,
+            "status": "COMPLETED",
+            "score": "37.0/100.0",
+		    "rating": "3.33/9.0",
+            "level": "NOVICE",
+            "submittedOn": "2021-04-21T18:30:00.000+00:00"
+          },
+          {
+            "userId": 1,
+            "userEmail": "test-user@test.com",
+            "marketUnit": "Test Market Unit",
+		    "project": "TestProject",
+            "surveyId": 1,
+            "surveyTitle": "Accenture Innovation Quotient Survey",
+            "version": 1,
+            "status": "COMPLETED",
+            "score": "37.0/100.0",
+		    "rating": "3.33/9.0",
+            "level": "PRACTITIONER",
+            "submittedOn": "2021-04-21T18:30:00.000+00:00"
+          },
+          {
+            "userId": 1,
+            "userEmail": "test-user@test.com",
+            "marketUnit": "Test Market Unit",
+		    "project": "TestProject",
+            "surveyId": 1,
+            "surveyTitle": "Accenture Innovation Quotient Survey",
+            "version": 1,
+            "status": "COMPLETED",
+            "score": "37.0/100.0",
+		    "rating": "3.33/9.0",
+            "level": "INTERMEDIATE",
+            "submittedOn": "2021-04-21T18:30:00.000+00:00"
+          }
+		
+	  ]
+	}
+}
