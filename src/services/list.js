@@ -1,5 +1,16 @@
 export function getList() {
-    return fetch('http://localhost:3333/surveys')
-      .then(data => data.json())
-  }
-  
+
+
+
+    return fetch('http://localhost:8081/dashboard/admin/3?marketUnit=ALL', {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Allow": "*",
+                "Content-type": "Application/json",
+            }
+        })
+        .then(data => data.json())
+
+
+
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState }  from 'react';
-import {getList} from '../services/list';
+import { getList } from '../services/list';
 const rating = (data)=> {
     switch (data.toLowerCase()) {
         case 'novice':
@@ -8,7 +8,7 @@ const rating = (data)=> {
                 <i className="fa fa-star fa-2x"></i>
             </div>);
 
-        case 'intermediate':
+        case 'beginner':
             return (<div>
                 <i className="fa fa-star fa-2x"></i>
                 <i className="fa fa-star fa-2x"></i>
@@ -45,11 +45,12 @@ const Dashboard = () => {
         console.log('Inside useEffect')
         getList()
           .then(items => {
-                setDashboarddata(items.surveyList)
+                console.log(items.surveys)
+                setDashboarddata(items.surveys.surveyList)
           })
       }, [])
     const renderDashboradData = dashboarddata.map((data) => {
-        
+        console.log(data)
         return (
             <div key= {data.surveyId} className={`container survey-box`}>
                 <div className="row">
@@ -57,7 +58,6 @@ const Dashboard = () => {
                         <div className="col-sm-3 s-box-pad">
                         <div className="row s-box-1 box-bold">{data.marketUnit}</div>
                         <div className="row s-box-1 box-bold">{data.project}</div>
-                        <div className="row s-box-1 box-bold">{data.surveyTitle}</div>
                         <div className="row s-box-2">Date: {data.submittedOn ? data.submittedOn : '-'}</div>
                         </div>
                         <div className="col-sm-2 s-box-pad">
