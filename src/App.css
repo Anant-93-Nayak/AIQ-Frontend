@@ -469,6 +469,9 @@ input {
 .marT30{
     margin-top: 30px;
 }
+.marT5{
+    margin-top: 5px;
+}
 /*--Input data---*/
 #input-Data{
     /* display: none; */
@@ -482,7 +485,6 @@ input {
 }
 #input-Data .user_info h2{
     display: block;
-    padding-left: 50%;
 }
 /*--dashBoard--*/
 #dashBoard{
@@ -836,7 +838,7 @@ h1{
     background-position: center;
 }
 #dashboard .survey-box .row{
-    justify-content: center;
+    justify-content: left;
     font-size: 14px;
 }
 
@@ -865,7 +867,6 @@ h1{
 #dashboard .assessment-btn, .page-fragment .next-btn,.page-fragment .btn-primary {
    font-size: 14px;
     padding: 0 20px;
-    border-radius: 20px;
     height: 40px;
 }
 .page-fragment,#loginPage,.welcomeText{
@@ -890,7 +891,6 @@ h1{
     z-index: 1;
 }
 .page-fragment{
-    margin-left: 100px;
     margin-top: 100px !important;
 }
 nav.navbar{
@@ -920,7 +920,7 @@ nav.navbar{
 #table-detail .invoice-detail{
     font-size: 16px;
 }
-#thank-you .go-to-dashboard{
+#thank-you .go-to-dashboard,#thank-you a{
     margin: auto;
 }
 nav.navbar .left-section div ,nav.navbar .right-section div, .primary-nav li{
@@ -1024,4 +1024,7 @@ nav.navbar h2{
 .dropdown-content button{
     width: 100%;
     background-color: inherit;
+}
+.left-dashboard-heading{
+    margin-right: 10px;
 }

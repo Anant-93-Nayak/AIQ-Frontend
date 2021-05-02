@@ -56,25 +56,25 @@ const Dashboard = () => {
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="col-sm-3 s-box-pad">
-                        <div className="row s-box-1 box-bold">{data.marketUnit}</div>
-                        <div className="row s-box-1 box-bold">{data.project}</div>
-                        <div className="row s-box-2">Date: {data.submittedOn ? data.submittedOn : '-'}</div>
+                        <div className="row s-box-1"><span className="box-bold left-dashboard-heading">Market Unit:</span> {data.marketUnit}</div>
+                        <div className="row s-box-1"><span className="box-bold left-dashboard-heading">Project Name:</span> {data.project}</div>
+                        <div className="row s-box-2"><span className="box-bold left-dashboard-heading">Date:</span>{data.submittedOn ? data.submittedOn : '-'}</div>
                         </div>
                         <div className="col-sm-2 s-box-pad">
                             <div className="row s-box-3 box-bold">Score</div>
-                        <div className="row s-box-4">{data.score}</div>
+                        <div className="row s-box-4 marT5">{data.score ? data.score : '-'}</div>
                         </div>
                         <div className="col-sm-2 s-box-pad">
                             <div className="row s-box-3 box-bold">Rating</div>
-                            <div className="row s-box-4">{data.rating}</div>
+                            <div className="row s-box-4 marT5">{data.rating ? data.rating : '-'}</div>
                         </div>
                         <div className="col-sm-2 s-box-pad">
                             <div className="row s-box-7 box-bold">Status</div>
-                            <div className="row s-box-8 is-submitted">{data.status}</div>
+                            <div className="row s-box-8 is-submitted marT5">{data.status ? data.status : '-'}</div>
                         </div>
                         <div className="col-sm-3 s-box-pad ">
                             <div className="row s-box-5 box-bold">Overall Level </div>
-                            <div className="row s-box-6">{data.level}</div>
+                            <div className="row s-box-6 marT5">{data.level}</div>
                             <div className="row s-box-6 star-icons">{rating(data.level ? data.level : '') }</div>
                         </div>
                     </div>
