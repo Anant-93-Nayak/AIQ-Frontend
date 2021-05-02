@@ -2,7 +2,7 @@
 
 
 
-  return fetch('http://localhost:8081/survey/start/1/1', {
+  return fetch('http://localhost:8081/survey/start/1/2', {
           headers: {
               "Access-Control-Allow-Origin": "*",
               "Allow": "*",
@@ -10,6 +10,10 @@
           }
       })
       .then(data => data.json())
+      .then(err => {
+        alert("There are already surveys in in progress state for this customer's project. Kindly complete them first");
+        window.location.assign('/dashboard');
+      })
 
 
 

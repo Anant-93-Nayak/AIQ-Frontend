@@ -51,14 +51,13 @@ const Aiq = ({setDisplayPage}) => {
         })
     }
     useEffect(() => {
-            let items = getFormData();
-      
+            let items = getFormData()
                 console.log(items.survey)
                 setFormData(items);
                 setMessage(items.survey.homePage.innovationLead);
                 setAiqDisplay(1);
                 postList(items);
-          
+            
         
      },[]);
     
@@ -222,14 +221,16 @@ const Aiq = ({setDisplayPage}) => {
             "optionsData": optionData   
             
         }
+        requestParameter = JSON.stringify(requestParameter);
         console.log(requestParameter);
        /* axios.post('http://localhost:8081/survey/save', requestParameter)
         .then(response => console.log('>>>>>>>>>>',response));*/
-        return fetch('http://localhost:8081/survey/save', {
+        return axios.put('http://localhost:8081/survey/save', {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Allow": "*",
                 "Content-type": "Application/json",
+                "Access-Control-Allow-Credentials":true
             },
             type: 'PUT',
             contentType: 'application/json',
