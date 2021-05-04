@@ -646,9 +646,6 @@ input {
 
 /*------Thank you-------*/
 
-#thank-you{
-    /* display: none; */
-}
 *{
     box-sizing:border-box;
     /* outline:1px solid ;*/
@@ -919,6 +916,7 @@ nav.navbar{
 
 #table-detail .invoice-detail{
     font-size: 16px;
+    margin-top: 20px;
 }
 #thank-you .go-to-dashboard,#thank-you a{
     margin: auto;
@@ -1006,7 +1004,7 @@ nav.navbar h2{
 }
 
 .finish-btn{
-    width: 80px;
+    width: 100px;
 }
 
 #thank-you .wrapper-2 .container{
@@ -1027,4 +1025,7 @@ nav.navbar h2{
 }
 .left-dashboard-heading{
     margin-right: 10px;
+}
+.result-page .table{
+    margin-bottom: 0;
 }

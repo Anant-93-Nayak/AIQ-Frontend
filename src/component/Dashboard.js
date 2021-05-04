@@ -1,5 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { getList } from '../services/list';
+import {Link} from 'react-router-dom';
 const rating = (data)=> {
     switch (data.toLowerCase()) {
         case 'novice':
@@ -70,7 +71,8 @@ const Dashboard = () => {
                         </div>
                         <div className="col-sm-2 s-box-pad">
                             <div className="row s-box-7 box-bold">Status</div>
-                            <div className="row s-box-8 is-submitted marT5">{data.status ? data.status : '-'}</div>
+                            <div className="row s-box-8 is-submitted marT5">{data.status ? (data.status == 'IN PROGRESS' ? <Link to="/questionaire" > {data.status}</Link> : data.status) : '-'}</div>
+                            
                         </div>
                         <div className="col-sm-3 s-box-pad ">
                             <div className="row s-box-5 box-bold">Overall Level </div>

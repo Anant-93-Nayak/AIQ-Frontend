@@ -2,7 +2,7 @@ export function getList() {
 
 
 
-    return fetch('http://localhost:8081/dashboard/admin/3?marketUnit=ALL', {
+    return fetch('http://localhost:8081/dashboard/user/5', {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Allow": "*",

@@ -1,25 +1,22 @@
-/*export function getFormData() {
+export function getFormData() {
 
 
 
-  return fetch('http://localhost:8081/survey/start/1/2', {
+  return fetch('http://localhost:8081/survey/start/1/5', {
           headers: {
               "Access-Control-Allow-Origin": "*",
               "Allow": "*",
               "Content-type": "Application/json",
           }
       })
-      .then(data => data.json())
-      .then(err => {
-        alert("There are already surveys in in progress state for this customer's project. Kindly complete them first");
-        window.location.assign('/dashboard');
-      })
+      .then(data => data.json());
+      
 
 
 
-}*/
+}
 
-export function getFormData() {
+/*export function getFormData() {
     return {
         "survey": {
           "surveyId": 1,
@@ -1396,4 +1393,4 @@ export function getFormData() {
 
 
 
-}
+}*/

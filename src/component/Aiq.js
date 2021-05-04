@@ -14,6 +14,7 @@ const Aiq = ({setDisplayPage}) => {
     const [showFormSevenData, setshowFormSevenData] = useState([]); 
     const [showFormEightData, setshowFormEightData] = useState([]); 
     const [showFormNineData, setshowFormNineData] = useState([]); 
+    const [showResultData, setshowResultData] = useState([]);
 
     // const [form1field1,setform1field1] = useState(0);
    // cosnt [ formHomePage, setFormHomePage] = useState([]);
@@ -51,12 +52,14 @@ const Aiq = ({setDisplayPage}) => {
         })
     }
     useEffect(() => {
-            let items = getFormData()
+            getFormData().then( (items) =>{
                 console.log(items.survey)
                 setFormData(items);
                 setMessage(items.survey.homePage.innovationLead);
                 setAiqDisplay(1);
                 postList(items);
+            });
+                
             
         
      },[]);
@@ -210,7 +213,7 @@ const Aiq = ({setDisplayPage}) => {
         let requestParameter={
             "userId": formData.survey.userId,
 	        "surveyId": formData.survey.surveyId,
-	        "projectId":29,
+	        "projectId":13,
 	        "marketUnit": formData.survey.homePage.marketUnit.filter(unit => unit.default)[0].value,
 	        "clientGroup": formData.survey.homePage.clientGroup.filter(unit => unit.default)[0].value,
 	        "deliveryUnit": formData.survey.homePage.deliveryUnit.filter(unit => unit.default)[0].value,
@@ -225,7 +228,7 @@ const Aiq = ({setDisplayPage}) => {
         console.log(requestParameter);
        /* axios.post('http://localhost:8081/survey/save', requestParameter)
         .then(response => console.log('>>>>>>>>>>',response));*/
-        return axios.put('http://localhost:8081/survey/save', {
+        return axios.put('http://localhost:8081/survey/submit', requestParameter,{
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Allow": "*",
@@ -234,10 +237,13 @@ const Aiq = ({setDisplayPage}) => {
             },
             type: 'PUT',
             contentType: 'application/json',
-            data: requestParameter,
             dataType: "json",
         })
-        .then(response => console.log('>>>>>>>>>>',response));
+        .then(response => {
+            console.log('>>>>>>>>>>',response);
+            setshowResultData(response.data);
+            showNextForm(9)
+        });
 
     }
 
@@ -1205,53 +1211,7 @@ const Aiq = ({setDisplayPage}) => {
                                     <div className="col-sm-12 marT30">
                                         <form className="px-4 py-3">
                                             {renderFormNineData}
-                                            {/* <div className="form-group row">
-                                                <label htmlFor="filter">1. Do you plan account showcases at Accenture
-                                                    Innovation Hub?</label>
-                                                <select className="form-control">
-                                                    <option value="0" selected>No, I haven't discussed any innovation
-                                                        program with client at this point in time</option>
-                                                    <option value="1">Yes, the discussion has come in few meetings where
-                                                    Accenture capabilities in driving innovation were mentioned but
-                                                        hasn’t progressed thereafter</option>
-                                                    <option value="2">Yes, I have regular connects with clients talking
-                                                        on innovation program and objectives within the account</option>
-                                                    <option value="3">Yes, I have strategic level connects with senior
-                                                    stakeholders where innovation is a key contributor to business
-                                                    bottomline and brand value where also Accenture is a key partner
-                                                        in driving growth of business</option>
-                                                </select>
-                                            </div>
-                                            <div className="form-group row">
-                                                <label htmlFor="filter">2. Do you collaborate with Accenture Innovation Hub
-                                                / Accenture Studio for client innovation framework /
-                                                    architecture?</label>
-                                                <select className="form-control">
-                                                    <option value="0" selected>Not particularly other than the line of
-                                                        business Accenture is contracted to work and deliver</option>
-                                                    <option value="1">Yes we are aware, but we don’t necessarily talk
-                                                    about it as we are not driven by contractual obligations to
-                                                        delve into other sides of business</option>
-                                                    <option value="2">Yes, we are aware about the client business
-                                                    challenges and they are being discussed at project deliverable
-                                                        connects with business stakeholders</option>
-                                                    <option value="3">Yes, client business challenges are discussed at
-                                                    CXO levels with ATCI and do constitute a strategic lever for
-                                                    Accenture to develop/sustain business relationship in the future
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div className="form-group row">
-                                                <label htmlFor="filter">3. Do you showcase client assets to Accenture
-                                                    Innovation Hub/ Accenture Studio?</label>
-                                                <select className="form-control">
-                                                    <option value="0" selected>All Snippets</option>
-                                                    <option value="1">Featured</option>
-                                                    <option value="2">Most popular</option>
-                                                    <option value="3">Top rated</option>
-                                                    <option value="4">Most commented</option>
-                                                </select>
-                                            </div> */}
+                                            
                                             <div className="form-group row">
                                                 <label htmlFor="filter">Addition Comments</label>
                                                 <input type="text" className="form-control cus_input" id="" name=""
@@ -1279,9 +1239,17 @@ const Aiq = ({setDisplayPage}) => {
         )
     }
 
-    const showResult = () => {
+    const showResult = (showResultData) => {
+        let paramTitle =[],paramlevel = [],paramScore =[];
+        showResultData.surveyResultResponse.innoParamResults.map((result) => {
+            paramTitle.push(<th className="col-sm-3">{result.innoParamTitle}</th>);
+            paramlevel.push(<td className="col-sm-3">{result.level}</td>);
+            paramScore.push(<td className="col-sm-3">{result.score}</td>);
+        });
+       
+
         return (
-            <div id="table-detail" className="next-9 page-fragment">
+            <div id="table-detail" className="next-9 page-fragment result-page">
                 <div className="container-fluid dash_cus">
                     <div className="container">
                         <div className="user_info">
@@ -1289,24 +1257,18 @@ const Aiq = ({setDisplayPage}) => {
                                 <div className="col-sm-12">
                                     <table className="table">
                                         <tbody>
+                                                                                
                                             <tr>
-                                                <th>Understand Client Challenges and Objectives</th>
-                                                <th>Client Co Innovation Framework</th>
-                                                <th>Innovation Capabilities within engagement</th>
-                                                <th>Degree of Innovation</th>
+                                                {paramTitle.splice(0, 4)}
                                             </tr>
                                             <tr>
-                                                <td>4</td>
-                                                <td>0</td>
-                                                <td>3</td>
-                                                <td>0</td>
+                                                {paramlevel.splice(0, 4)}
                                             </tr>
                                             <tr>
-                                                <td>BEGINNER</td>
-                                                <td>NOVICE</td>
-                                                <td>NOVICE</td>
-                                                <td>NOVICE</td>
+                                                {paramScore.splice(0, 4)}
+                                                
                                             </tr>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
@@ -1315,33 +1277,27 @@ const Aiq = ({setDisplayPage}) => {
                                 <div className="col-sm-12">
                                     <table className="table">
                                         <tbody>
+                                                                                
                                             <tr>
-                                                <th>Client Value</th>
-                                                <th>Client Testimonials (Audio & Video)</th>
-                                                <th>Leverage Accenture Innovation Architecture</th>
-                                                <th>Contribution to Accenture Innovation Architecture</th>
+                                                {paramTitle.splice(-4)}
                                             </tr>
                                             <tr>
-                                                <td>2</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
+                                                {paramlevel.splice(-4)}
                                             </tr>
                                             <tr>
-                                                <td>NOVICE</td>
-                                                <td>NOVICE</td>
-                                                <td>NOVICE</td>
-                                                <td>NOVICE</td>
+                                                {paramScore.splice(-4)}
+                                                
                                             </tr>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div className="row invoice-detail">
                                 <div className="col-sm-12">
-                                    <div className="col-sm-3">Overall AIQ Score : 12</div>
-                                    <div className="col-sm-3">Rating : 2.4</div>
-                                    <div className="col-sm-3">NOVICE</div>
+                                    <div className="col-sm-3">Overall AIQ Score : {showResultData.surveyResultResponse.surveyScore}</div>
+                                    <div className="col-sm-3">Rating : {showResultData.surveyResultResponse.surveyRating}</div>
+                                    <div className="col-sm-3">{showResultData.surveyResultResponse.level}</div>
                                     <button className="btn btn-primary float-right next-btn finish-btn"
                                         data-next="10" type="button" onClick={() => { showNextForm(10) }}>FINISH</button>
                                 </div>
@@ -1358,9 +1314,12 @@ const Aiq = ({setDisplayPage}) => {
     const showFinalMsg=()=>{
         return(
             <div className="content next-10 page-fragment" id="thank-you">
-                <div className="wrapper-1">
+                <div className="">
                     <div className="wrapper-2">
-                        <h1>Thank you !</h1>
+                    <p>
+                        <i class="fa fa-check-circle fa-5x"></i>
+                    </p>
+                        <h1>Thank you for your Submission !</h1>
                         <div className="container marT30 ">
                             <div className="row">
                             <Link to="/dashboard" >
@@ -1405,7 +1364,7 @@ const Aiq = ({setDisplayPage}) => {
             return (showFormNine(showFormNineData));
 
         case 10:
-            return (showResult());
+            return (showResult(showResultData));
 
         case 11:
             return (showFinalMsg());
