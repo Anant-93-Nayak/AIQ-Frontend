@@ -662,13 +662,19 @@ input {
     padding :30px;
     text-align:center;
 }
-h1{
-    font-family: 'Kaushan Script', cursive;
-    font-size:4em;
+#thank-you h1{
+    font-size:3em;
     letter-spacing:3px;
-    color:#5892FF ;
+    color: #262c56 ;
     margin:0;
     margin-bottom:20px;
+}
+#thank-you h3{
+    letter-spacing:3px;
+    color: #757E8D ;
+    margin:0;
+    margin-bottom:20px;
+    font-size: 1.5em;
 }
 .wrapper-2 p{
     margin:0;
@@ -708,7 +714,7 @@ h1{
 
 @media (min-width:360px){
     h1{
-        font-size:4.5em;
+        font-size:3.5em;
     }
     .go-home{
         margin-bottom:20px;
@@ -1028,4 +1034,18 @@ nav.navbar h2{
 }
 .result-page .table{
     margin-bottom: 0;
+}
+
+.form-group .errorBox{
+    display: none;
+    color: #b94a48;
+    opacity: 0.8;
+    font-size: 12px;
+}
+.form-group.has-error .errorBox{
+    display: block;
+}
+#thank-you  .fa-check-circle{
+    color: #87d184;
+    font-size: 18em;
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getFormData } from '../services/formsData';
-import {Link} from 'react-router-dom';
+import {Link, Switch} from 'react-router-dom';
 import axios from 'axios';
 
 const Aiq = ({setDisplayPage}) => {
@@ -21,12 +21,117 @@ const Aiq = ({setDisplayPage}) => {
    const [ formData, setFormData] = useState([]);
    const[message, setMessage] = useState();
     //const formData;
-  
+    const [render, setrender] = useState();
     const showNextForm=(currentForm)=>{
         //check if all fields are filled of a form, before proceeding to next
-        if(true){
+        let formcheck;
+        let hasErrorInForm = false;
+        switch(currentForm){
+            case 1: 
+                    [formcheck,hasErrorInForm] = checkIfFormHasError(formData,currentForm,hasErrorInForm);
+                    setFormData(formcheck);
+                    break;
+            case 2: 
+                    [formcheck,hasErrorInForm]  = checkIfFormHasError(showFormTwoData,currentForm,hasErrorInForm);
+                    setshowFormTwoData(formcheck);
+                    break;
+            case 3: 
+                    [formcheck,hasErrorInForm] = checkIfFormHasError(showFormThreeData,currentForm,hasErrorInForm);
+                    setshowFormThreeData(formcheck);
+                    break;
+            case 4: 
+                    [formcheck,hasErrorInForm] = checkIfFormHasError(showFormFourData,currentForm,hasErrorInForm);
+                    setshowFormFourData(formcheck);
+                    break;
+            case 5: 
+                    [formcheck,hasErrorInForm] = checkIfFormHasError(showFormFiveData,currentForm,hasErrorInForm);
+                    setshowFormFiveData(formcheck);
+                    break;
+            case 6: 
+                    [formcheck,hasErrorInForm] = checkIfFormHasError(showFormSixData,currentForm,hasErrorInForm);
+                    setshowFormSixData(formcheck);
+                    break;
+            case 7: 
+                    [formcheck,hasErrorInForm] = checkIfFormHasError(showFormSevenData,currentForm,hasErrorInForm);
+                    setshowFormSevenData(formcheck); 
+                    break;
+            case 8: 
+                    [formcheck,hasErrorInForm] = checkIfFormHasError(showFormEightData,currentForm,hasErrorInForm);
+                    setshowFormEightData(formcheck);
+                    break;
+        }
+        setrender(Math.random());
+        
+        console.log(formcheck);
+        
+        if(!hasErrorInForm){
             setAiqDisplay(aiqDisplay + 1);
         }
+    }
+
+    const checkIfFormHasError = (formcheck,currentForm,hasErrorInForm) =>{
+        if(currentForm > 1 && currentForm <=8){
+            formcheck.questions.forEach(element => {
+                  if(element.options[0].default){
+                    element.hasError=true 
+                    hasErrorInForm =true;
+                  }else{
+                    element.hasError=false;
+                  } 
+                  
+             });
+        }
+        if(currentForm == 1){
+            formcheck.survey.homePage.marketUnit.map((options) =>{
+                if(options.value === 'Please Select' && options.default){
+                    formcheck.survey.homePage.marketUnit.hasError =true;
+                    hasErrorInForm =true;
+                }else if(options.default){
+                    formcheck.survey.homePage.marketUnit.hasError = false;
+                }
+            });
+            formcheck.survey.homePage.clientGroup.map((options) =>{
+                if(options.value === 'Please Select' && options.default){
+                    formcheck.survey.homePage.clientGroup.hasError =true;
+                    hasErrorInForm =true;
+                }else if(options.default){
+                    formcheck.survey.homePage.clientGroup.hasError = false;
+                }
+            });
+            formcheck.survey.homePage.deliveryUnit.map((options) =>{
+                if(options.value === 'Please Select' && options.default){
+                    formcheck.survey.homePage.deliveryUnit.hasError =true;
+                    hasErrorInForm =true;
+                }else if(options.default){
+                    formcheck.survey.homePage.deliveryUnit.hasError = false;
+                }
+            });
+            formcheck.survey.homePage.clientName.map((options) =>{
+                if(options.value === 'Please Select' && options.default){
+                    formcheck.survey.homePage.clientName.hasError =true;
+                    hasErrorInForm =true;
+                }else if(options.default){
+                    formcheck.survey.homePage.clientName.hasError = false;
+                }
+            });
+            formcheck.survey.homePage.cal.map((options) =>{
+                if(options.value === 'Please Select' && options.default){
+                    formcheck.survey.homePage.cal.hasError =true;
+                    hasErrorInForm =true;
+                }else if(options.default){
+                    formcheck.survey.homePage.cal.hasError = false;
+                }
+            });
+            formcheck.survey.homePage.deliveryMD.map((options) =>{
+                if(options.value === 'Please Select' && options.default){
+                    formcheck.survey.homePage.deliveryMD.hasError =true;
+                    hasErrorInForm =true;
+                }else if(options.default){
+                    formcheck.survey.homePage.deliveryMD.hasError = false;
+                }
+            });
+        }
+        return [formcheck,hasErrorInForm];
     }
 
     const postList = (formData) =>{
@@ -176,25 +281,13 @@ const Aiq = ({setDisplayPage}) => {
     }
 
     const submitQuestionnaire = () =>{
-        /*formData.survey.innovationParams.map((data) => {
-            if (data.id === 1){
-                formData.survey.innovationParams[1]= showFormTwoData;  
-            }else if(data.id ===2){
-                formData.survey.innovationParams[2]= showFormThreeData;  
-            }else if(data.id ===3){
-                formData.survey.innovationParams[3]= showFormFourData;  
-            }else if(data.id ===4){
-                formData.survey.innovationParams[4]= showFormFiveData;  
-            }else if(data.id ===5){
-                formData.survey.innovationParams[5]= showFormSixData;  
-            }else if(data.id ===6){
-                formData.survey.innovationParams[6]= showFormSevenData;  
-            }else if(data.id ===7){
-                formData.survey.innovationParams[7]= showFormEightData;  
-            }else if(data.id ===8){
-                formData.survey.innovationParams[8]= showFormNineData;  
-            }
-        })*/
+        let formcheck, hasErrorInForm;
+        [formcheck,hasErrorInForm] = checkIfFormHasError(showFormNineData,9,false);
+        setshowFormNineData(formcheck);
+        setrender(Math.random());
+        if(hasErrorInForm){
+            return false;
+        }
         let optionData = [];
         formData.survey.innovationParams.map((innovation) =>{
             innovation.questions.map((question) => {
@@ -263,7 +356,7 @@ const Aiq = ({setDisplayPage}) => {
                                     </div>
                                     <div className="col-sm-12 marT30">
                                         <form action="">
-                                            <div className="form-group row">
+                                            <div className={formData.survey.homePage.marketUnit.hasError ?  "form-group row has-error" : "form-group row"}>
                                                 <label htmlFor="newName">Market Unit:</label>
                                                 <select className="form-control"  onChange={(e) => updateFirstFormState(e.target.value,'marketUnit') }>
                                                     {formData.survey.homePage.marketUnit.map((answer)=>{
@@ -272,9 +365,10 @@ const Aiq = ({setDisplayPage}) => {
                                                         )
                                                     })}
                                                 </select>
+                                                <div className="errorBox">Please Select the appropriate option</div>
 
                                             </div>
-                                            <div className="form-group row">
+                                            <div className={formData.survey.homePage.clientGroup.hasError ?  "form-group row has-error" : "form-group row"}>
                                                 <label htmlFor="newName">Client Group:</label>
                                                 <select className="form-control" onChange={(e) => updateFirstFormState(e.target.value,'clientGroup')}>
                                                     {formData.survey.homePage.clientGroup.map((answer)=>{
@@ -283,8 +377,9 @@ const Aiq = ({setDisplayPage}) => {
                                                         )
                                                     })}
                                                 </select>
+                                                <div className="errorBox">Please Select the appropriate option</div>
                                             </div>
-                                            <div className="form-group row">
+                                            <div className={formData.survey.homePage.deliveryUnit.hasError ?  "form-group row has-error" : "form-group row"}>
                                                 <label htmlFor="newName">Delivery Unit:</label>
                                                 <select className="form-control" onChange={(e) => updateFirstFormState(e.target.value,'deliveryUnit')}>
                                                     {formData.survey.homePage.deliveryUnit.map((answer)=>{
@@ -293,8 +388,9 @@ const Aiq = ({setDisplayPage}) => {
                                                         )
                                                     })}
                                                 </select>
+                                                <div className="errorBox">Please Select the appropriate option</div>
                                             </div>
-                                            <div className="form-group row">
+                                            <div className={formData.survey.homePage.clientName.hasError  ?  "form-group row has-error" : "form-group row"}>
                                                 <label htmlFor="newName">Client Name:</label>
                                                 <select className="form-control" onChange={(e) => updateFirstFormState(e.target.value,'clientName')}>
                                                     {formData.survey.homePage.clientName.map((answer)=>{
@@ -303,8 +399,9 @@ const Aiq = ({setDisplayPage}) => {
                                                         )
                                                     })}
                                                 </select>
+                                                <div className="errorBox">Please Select the appropriate option</div>
                                             </div>
-                                            <div className="form-group row">
+                                            <div className={formData.survey.homePage.cal.hasError ?  "form-group row has-error" : "form-group row"}>
                                                 <label htmlFor="newName">CAL:</label>
                                                 <select className="form-control" onChange={(e) => updateFirstFormState(e.target.value,'cal')}>
                                                     {formData.survey.homePage.cal.map((answer)=>{
@@ -313,9 +410,10 @@ const Aiq = ({setDisplayPage}) => {
                                                         )
                                                     })}
                                                 </select>
+                                                <div className="errorBox">Please Select the appropriate option</div>
 
                                             </div>
-                                            <div className="form-group row">
+                                            <div className={formData.survey.homePage.deliveryMD.hasError ?  "form-group row has-error" : "form-group row"}>
                                                 <label htmlFor="newName">Delivery Lead:</label>
                                                 <select className="form-control" onChange={(e) => updateFirstFormState(e.target.value,'deliveryMD')}>
                                                     {formData.survey.homePage.deliveryMD.map((answer)=>{
@@ -323,7 +421,8 @@ const Aiq = ({setDisplayPage}) => {
                                                           <option key={answer.value} value={answer.value} selected={answer.default}>{answer.value}</option>
                                                         )
                                                     })}
-                                                </select>    
+                                                </select>   
+                                                <div className="errorBox">Please Select the appropriate option</div> 
                                             </div>
                                             <div className="form-group row">
                                                 <label htmlFor="newName">Innovation Responsible:</label>
@@ -357,12 +456,14 @@ const Aiq = ({setDisplayPage}) => {
                   <option key={options.orderId} value={options.value} selected={options.default} onClick = {() => console.log('RAM')}>{options.answer}</option>
                   )
             })
+
              return (
-                <div key= {questions.id} className="form-group row">
+                <div key= {questions.id}  className={questions.hasError ?  "form-group row has-error" : "form-group row"}>
                 <label htmlFor="filter">{questions.orderId} : {questions.question}</label>
                 <select className="form-control"  onChange={(e) => updateDefaultState(e.target.value,questions.id,showFormTwoData) }>
                     {renderFormTwoDataOptions}
                 </select>
+                <div className="errorBox">Please Select the appropriate option</div>
             </div>
             )
         })
@@ -485,11 +586,12 @@ const Aiq = ({setDisplayPage}) => {
                 )
             })
              return (
-                <div key={questions.id} className="form-group row">
+                <div key={questions.id} className={questions.hasError ?  "form-group row has-error" : "form-group row"}>
                 <label htmlFor="filter">{questions.orderId} : {questions.question}</label>
                 <select className="form-control" onChange={(e) => updateDefaultState(e.target.value,questions.id,showFormThreeData) }>
                     {renderFormThreeDataOptions}
                 </select>
+                <div className="errorBox">Please Select the appropriate option</div>
             </div>
             )
         })
@@ -600,11 +702,12 @@ const Aiq = ({setDisplayPage}) => {
                 )
             })
              return (
-                <div key={questions.id} className="form-group row">
+                <div key={questions.id} className={questions.hasError ?  "form-group row has-error" : "form-group row"}>
                 <label htmlFor="filter">{questions.orderId} : {questions.question}</label>
                 <select className="form-control" onChange={(e) => updateDefaultState(e.target.value,questions.id,showFormFourData) }>
                     {renderFormFourDataOptions}
                 </select>
+                <div className="errorBox">Please Select the appropriate option</div>
             </div>
             )
         })
@@ -727,11 +830,12 @@ const Aiq = ({setDisplayPage}) => {
                 )
             })
              return (
-                <div key={questions.id} className="form-group row">
+                <div key={questions.id} className={questions.hasError ?  "form-group row has-error" : "form-group row"}>
                 <label htmlFor="filter">{questions.orderId} : {questions.question}</label>
                 <select className="form-control" onChange={(e) => updateDefaultState(e.target.value,questions.id,showFormFiveData) }>
                     {renderFormFiveDataOptions}
                 </select>
+                <div className="errorBox">Please Select the appropriate option</div>
             </div>
             )
         })
@@ -832,11 +936,12 @@ const Aiq = ({setDisplayPage}) => {
                 )
             })
              return (
-                <div key={questions.id} className="form-group row">
+                <div key={questions.id} className={questions.hasError ?  "form-group row has-error" : "form-group row"}>
                 <label htmlFor="filter">{questions.orderId} : {questions.question}</label>
                 <select className="form-control" onChange={(e) => updateDefaultState(e.target.value,questions.id,showFormSixData) }>
                     {renderFormSixDataOptions}
                 </select>
+                <div className="errorBox">Please Select the appropriate option</div>
             </div>
             )
         })
@@ -959,11 +1064,12 @@ const Aiq = ({setDisplayPage}) => {
                 )
             })
              return (
-                <div key={questions.id} className="form-group row">
+                <div key={questions.id} className={questions.hasError ?  "form-group row has-error" : "form-group row"}>
                 <label htmlFor="filter">{questions.orderId} : {questions.question}</label>
                 <select className="form-control" onChange={(e) => updateDefaultState(e.target.value,questions.id,showFormSevenData) }>
                     {renderFormSevenDataOptions}
                 </select>
+                <div className="errorBox">Please Select the appropriate option</div>
             </div>
             )
         })
@@ -1074,11 +1180,12 @@ const Aiq = ({setDisplayPage}) => {
                 )
             })
              return (
-                <div key={questions.id} className="form-group row">
+                <div key={questions.id} className={questions.hasError ?  "form-group row has-error" : "form-group row"}>
                 <label htmlFor="filter">{questions.orderId} : {questions.question}</label>
                 <select className="form-control" onChange={(e) => updateDefaultState(e.target.value,questions.id,showFormEightData) }>
                     {renderFormEightDataOptions}
                 </select>
+                <div className="errorBox">Please Select the appropriate option</div>
             </div>
             )
         })
@@ -1190,11 +1297,12 @@ const Aiq = ({setDisplayPage}) => {
                 )
             })
              return (
-                <div key={questions.id} className="form-group row">
+                <div key={questions.id} className={questions.hasError ?  "form-group row has-error" : "form-group row"}>
                 <label htmlFor="filter">{questions.orderId} : {questions.question}</label>
                 <select className="form-control" onChange={(e) => updateDefaultState(e.target.value,questions.id,showFormNineData) }>
                     {renderFormNineDataOptions}
                 </select>
+                <div className="errorBox">Please Select the appropriate option</div>
             </div>
             )
         })
@@ -1317,9 +1425,10 @@ const Aiq = ({setDisplayPage}) => {
                 <div className="">
                     <div className="wrapper-2">
                     <p>
-                        <i class="fa fa-check-circle fa-5x"></i>
+                        <i class="fa fa-check-circle"></i>
                     </p>
                         <h1>Thank you for your Submission !</h1>
+                        <h3>You can see the results on your dashboard as well</h3>
                         <div className="container marT30 ">
                             <div className="row">
                             <Link to="/dashboard" >
